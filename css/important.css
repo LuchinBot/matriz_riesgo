@@ -1,0 +1,26 @@
+.col-form-label{
+    font-size: 10px !important;
+    font-weight: 600 !important;
+    color: #a4a2a2;
+}
+.modal-title{
+    font-weight: 800 !important;
+}
+.close {
+    opacity: 1 !important;
+    float: right;
+    font-size: 1.5rem;
+    font-weight: 700;
+    line-height: 1;
+    color: #2c2c2c !important;
+    text-shadow: none !important;
+}
+.close span{
+    border-radius: 0.2rem;
+    background-color: #d2d2d2 !important;
+    padding: 0px 8px 0px 8px;
+}
+.close:hover {
+    color: #fff;
+    text-decoration: none
+}

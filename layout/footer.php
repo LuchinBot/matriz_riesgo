@@ -1,4 +1,3 @@
-
 <div class="footer">
     <div class="float-right">
         Tarapoto - <strong>Perú</strong>
@@ -11,12 +10,14 @@
 </div>
 
 <!-- Mainly scripts -->
-<script src="<?=$url?>js/jquery-3.1.1.min.js"></script>
-<script src="<?=$url?>js/popper.min.js"></script>
-<script src="<?=$url?>js/bootstrap.js"></script>
-<script src="<?=$url?>js/plugins/metisMenu/jquery.metisMenu.js"></script>
-<script src="<?=$url?>js/plugins/dataTables/datatables.min.js"></script>
-<script src="<?=$url?>js/inspinia.js"></script>
+<script src="<?= $url ?>js/jquery-3.1.1.min.js"></script>
+<script src="<?= $url ?>js/popper.min.js"></script>
+<script src="<?= $url ?>js/bootstrap.js"></script>
+<script src="<?= $url ?>js/plugins/metisMenu/jquery.metisMenu.js"></script>
+<script src="<?= $url ?>js/plugins/dataTables/datatables.min.js"></script>
+<script src="<?= $url ?>js/inspinia.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
 
 <!-- Page-Level Scripts -->
 <script>
@@ -63,6 +64,11 @@
             var filtroValor = $(this).val();
             tabla.column(0).search(filtroValor).draw();
         });
+
+    });
+
+    $(document).ready(function() {
+        $('.js-example-basic-multiple').select2();
     });
 </script>
 
