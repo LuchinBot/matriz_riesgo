@@ -6,6 +6,10 @@ body {
     background-color: #E8EDEF !important;
 }
 .valores_matriz input{
+    border-radius: 0 !important;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    font-size: 20px;
     text-align: center !important;
 }
 input, textarea, select{
@@ -16,7 +20,6 @@ input:focus{
     box-shadow: none !important;
 }
 textarea{
-    border: 0 !important;
     outline: none !important;
     box-shadow: none !important;
 }

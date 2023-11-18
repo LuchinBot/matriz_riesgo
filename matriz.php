@@ -1,17 +1,16 @@
 <?php
 include "layout/header.php";
-session_start();
 if (!isset($_SESSION['user'])) {
   header('Location: login');
 }
-
 if (isset($_POST['addMatriz'])) {
   $a = $_POST['iddimension'];
-  $b = $_POST['titulo_matriz'];
-  $c = $_POST['descripcion_matriz'];
+  $b = $_SESSION['user'];
+  $c = $_POST['titulo_matriz'];
+  $d = $_POST['descripcion_matriz'];
 
-  $stmt = $base->prepare('INSERT INTO matriz (iddimension, title_matriz, text_matriz) VALUES (?, ?,?)');
-  $result = $stmt->execute(array($a, $b, $c));
+  $stmt = $base->prepare('INSERT INTO matriz (iddimension,iduser, title_matriz, text_matriz) VALUES (?,?, ?,?)');
+  $result = $stmt->execute(array($a, $b, $c,$d));
 
   if ($result) {
     echo '<script type="text/javascript">window.location = "' . $url . 'matriz";</script>';
@@ -32,8 +31,8 @@ if (isset($_POST['editMatriz'])) {
   }
 }
 
-$stmt = $base->prepare('SELECT * from matriz as m inner join dimension as d on(d.iddimension = m.iddimension) where m.state_matriz = 1 ');
-$data1 = $stmt->execute();
+$stmt = $base->prepare('SELECT * from matriz as m inner join dimension as d on(d.iddimension = m.iddimension) where iduser = ? and m.state_matriz = 1 ');
+$data1 = $stmt->execute(array($_SESSION['user']));
 $data1 = $stmt->fetchAll(PDO::FETCH_OBJ);
 
 $stmt = $base->prepare('SELECT * from control_event as con inner join

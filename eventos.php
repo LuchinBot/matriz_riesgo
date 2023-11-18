@@ -1,6 +1,5 @@
 <?php
 include "layout/header.php";
-session_start();
 if (!isset($_SESSION['user'])) {
   header('Location: login');
 }
@@ -43,8 +42,9 @@ if (isset($_POST['addControl'])) {
 
 
 $stmt = $base->prepare('SELECT * from events as e inner join levels as l on(l.idlevel = e.idlevel)
-inner join probabilidad as p on(p.idprobabilidad = e.idprobabilidad) inner join impacto as i on(i.idimpacto=e.idimpacto) where e.state_event= 1 ');
-$eventos = $stmt->execute();
+inner join probabilidad as p on(p.idprobabilidad = e.idprobabilidad) inner join impacto as i on(i.idimpacto=e.idimpacto) 
+left join matriz as m on(m.idmatriz = i.idmatriz)where m.iduser = ? and e.state_event= 1 ');
+$eventos = $stmt->execute(array($_SESSION['user']));
 $eventos = $stmt->fetchAll(PDO::FETCH_OBJ);
 ?>
 

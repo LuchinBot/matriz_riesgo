@@ -1,17 +1,21 @@
 <?php
 $login = 1;
 include "layout/header.php";
-session_start();
 if (isset($_SESSION['user'])) {
-  header('Location: index');
+  header('Location: matriz');
 }
 $display = 0;
 if (isset($_POST['login'])) {
-  $email = $_POST['user'];
-  $token = $_POST['password'];
+  $user = $_POST['user'];
+  $token = $_POST['key'];
 
-  if ($email == "admin" && $token == "123456") {
-    $_SESSION['user'] = "Administrador";
+  $stm = $base->prepare('SELECT * from user where username=? and keyword = ?');
+  $res = $stm->execute(array($user,$token));
+  $res = $stm->fetch(PDO::FETCH_ASSOC);
+
+  if ($res) {
+    $_SESSION['user'] = $res['iduser'];
+    $_SESSION['fullname'] = $res['firstname'].' '.$res['lastname'];
     echo '<script>window.location.href = "' . $url . 'matriz";</script>';
   } else {
     $display = 1;
@@ -38,7 +42,7 @@ if (isset($_POST['login'])) {
         </div>
         <div class="form-group-login mb-5">
           <i class="fa-regular fa-eye"></i>
-          <input type="password" class="form-control-login" name="password" autocomplete="off" />
+          <input type="password" class="form-control-login" name="key" autocomplete="off" />
         </div>
       </div>
       <div class="scroll-login">

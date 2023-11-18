@@ -30,13 +30,17 @@ if (isset($_GET['id'])) {
                     <div class="form-group">
                         <label>Dimensión</label>
                         <select class="select2" name="iddimension" style="width: 100%;" required title="Campo requerido">
-                            <?php foreach ($dimension as $i) : ?>
-                                <option value="<?= $i->iddimension ?>"><?= $i->name_dimension ?></option>
-                            <?php endforeach; ?>
+                            <?php foreach ($dimension as $i) :
+                                if ($data['iddimension'] == $i->iddimension) { ?>
+                                    <option selected value="<?= $i->iddimension ?>"><?= $i->name_dimension ?></option>
+                                <?php } else { ?>
+                                    <option value="<?= $i->iddimension ?>"><?= $i->name_dimension ?></option>
+                            <?php }
+                            endforeach; ?>
                         </select>
                     </div>
                 <?php } else { ?>
-                    <div class="border rounded p-2 bg-success text-white fw-light">La matriz ya fue generada</div>
+                    <div class="border rounded p-2 bg-success text-white fw-bolder d-flex justify-content-center text-uppercase">La matriz está generada</div>
                     <input type="text" name="iddimension" value="<?= $data['iddimension'] ?>" hidden>
                 <?php } ?>
             </div>
@@ -127,7 +131,7 @@ if (isset($_GET['view'])) {
                                     <input type="text" minlength="4" name="nombre_impacto[]" required class="w-100" value="<?php echo $impacto->name_impacto; ?>">
                                     <input type="hidden" name="id_impacto[]" value="<?php echo $impacto->idimpacto; ?>">
                                 </td>
-                                <td>
+                                <td style="width: 25%;">
                                     <input type="number" min="1" name="valor_impacto[]" required class="w-100" value="<?php echo $impacto->value_impacto; ?>">
                                 </td>
                             </tr>
@@ -152,7 +156,7 @@ if (isset($_GET['view'])) {
                                     <input type="text" minlength="4" name="nombre_probabilidad[]" required class="w-100" value="<?php echo $probabilidad->name_probabilidad; ?>">
                                     <input type="hidden" name="id_probabilidad[]" value="<?php echo $probabilidad->idprobabilidad; ?>">
                                 </td>
-                                <td>
+                                <td style="width: 25%;">
                                     <input type="number" min="1" name="valor_probabilidad[]" required class="w-100" value="<?php echo $probabilidad->value_probabilidad; ?>">
                                 </td>
                             </tr>
@@ -161,7 +165,8 @@ if (isset($_GET['view'])) {
                 </table>
             </div>
         </div>
-        <div class="d-flex justify-content-end">
+        <div class="d-flex justify-content-between align-items-center border-bottom mb-4">
+            <p class="text-start fw-light text-secondary"><i class="fa-solid fa-circle-info text-danger"></i> Rellena todo los valores para poder calcular el mínimo y máximo</p>
             <p class="btn bg-success mb-4 fw-bold calcularMinMaxBtn">Calcular</p>
         </div>
         <div class="row">
@@ -183,10 +188,10 @@ if (isset($_GET['view'])) {
                                     <p class="text-center fw-bolder text-secondary"><?php echo $level->name_level; ?></p>
                                     <input type="hidden" name="id_level[]" value="<?php echo $level->idlevel; ?>">
                                 </td>
-                                <td>
+                                <td style="width: 20%;">
                                     <input type="number" min="1" name="min_level[]" required class="w-100" value="<?php echo $level->min_level; ?>">
                                 </td>
-                                <td>
+                                <td style="width: 20%;">
                                     <input type="number" min="1" name="max_level[]" required class="w-100" value="<?php echo $level->max_level; ?>">
                                 </td>
                                 <td>
@@ -205,11 +210,11 @@ if (isset($_GET['view'])) {
     </form>
 <?php }
 if (isset($_GET['matriz'])) {
-    $stmt = $base->prepare('SELECT * from probabilidad where idmatriz = ? ');
+    $stmt = $base->prepare('SELECT * from probabilidad where idmatriz = ? order by value_probabilidad desc');
     $stmt->execute(array($_GET['matriz']));
     $rows = $stmt->fetchAll(PDO::FETCH_OBJ);
 
-    $stmt = $base->prepare('SELECT * from impacto where idmatriz = ? ');
+    $stmt = $base->prepare('SELECT * from impacto where idmatriz = ? order by value_impacto asc');
     $stmt->execute(array($_GET['matriz']));
     $cols = $stmt->fetchAll(PDO::FETCH_OBJ);
 
@@ -313,32 +318,37 @@ if (isset($_GET['matriz'])) {
             var probabilidad = 0;
             var impacto = 0;
             $('.calcular-riesgo').on('click', function() {
-                $('.subir-evento').attr('disabled', false);
                 $('.probabilidad_event').each(function() {
                     var selectedOption = $(this).children('option:selected');
                     probabilidad = selectedOption.attr('id');
+                    
                 });
                 $('.impacto_event').each(function() {
                     var selectedOption = $(this).children('option:selected');
                     impacto = selectedOption.attr('id');
                 });
+                console.log(impacto);
+                if (probabilidad != '' && impacto != '') {
+                    $('.subir-evento').attr('disabled', false);
+                    if (!isNaN(probabilidad) && !isNaN(impacto)) {
+                        var resultado = probabilidad * impacto;
 
-                if (!isNaN(probabilidad) && !isNaN(impacto)) {
-                    var resultado = probabilidad * impacto;
+                        // Eliminamos el color de fondo antes de asignar uno nuevo
+                        $('input[name="result_event"]').css('background-color', '');
 
-                    // Eliminamos el color de fondo antes de asignar uno nuevo
-                    $('input[name="result_event"]').css('background-color', '');
-
-                    // Colorear el resultado según los niveles de riesgo
-                    for (var i = 0; i < nivelesRiesgo.length; i++) {
-                        if (resultado >= nivelesRiesgo[i].min_level && resultado <= nivelesRiesgo[i].max_level) {
-                            $('input[name="result_event"]').val(nivelesRiesgo[i].name_level);
-                            $('input[name="nivel"]').val(nivelesRiesgo[i].idlevel);
-                            $('input[name="result_event"]').css('background-color', nivelesRiesgo[i].color_level);
-                            break;
+                        // Colorear el resultado según los niveles de riesgo
+                        for (var i = 0; i < nivelesRiesgo.length; i++) {
+                            if (resultado >= nivelesRiesgo[i].min_level && resultado <= nivelesRiesgo[i].max_level) {
+                                $('input[name="result_event"]').val(nivelesRiesgo[i].name_level);
+                                $('input[name="nivel"]').val(nivelesRiesgo[i].idlevel);
+                                $('input[name="result_event"]').css('background-color', nivelesRiesgo[i].color_level);
+                                break;
+                                console.log(nivelesRiesgo[i].idlevel);
+                            }
                         }
                     }
                 }
+
             });
 
         });
@@ -371,10 +381,24 @@ if (isset($_GET['matriz'])) {
                 return parseFloat($(this).val()) || 0;
             }).get();
 
-            // Calcular el producto de probabilidad e impacto
-            for (var i = 0; i < valoresProbabilidad.length; i++) {
-                var resultadoMultiplicacion = valoresProbabilidad[i] * valoresImpacto[i];
-                valoresMultiplicados.push(resultadoMultiplicacion);
+            console.log(valoresProbabilidad);
+            console.log(valoresImpacto);
+
+            if (valoresProbabilidad.length > valoresImpacto.length) {
+                // Calcular el producto de probabilidad e impacto
+                for (var i = 0; i < valoresProbabilidad.length; i++) {
+                    for (var j = 0; j < valoresImpacto.length; j++) {
+                        var resultadoMultiplicacion = valoresProbabilidad[i] * valoresImpacto[j];
+                        valoresMultiplicados.push(resultadoMultiplicacion);
+                    }
+                }
+            } else {
+                for (var i = 0; i < valoresImpacto.length; i++) {
+                    for (var j = 0; j < valoresProbabilidad.length; j++) {
+                        var resultadoMultiplicacion = valoresProbabilidad[j] * valoresImpacto[i];
+                        valoresMultiplicados.push(resultadoMultiplicacion);
+                    }
+                }
             }
 
             // Eliminar valores cero del array

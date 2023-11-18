@@ -2,9 +2,11 @@
 require('conexion.php');
 $autor = "Brian Tipismana";
 $url = "http://localhost/matriz_riesgo/";
+session_start();
+
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
   <meta charset="utf-8">
@@ -39,8 +41,8 @@ $url = "http://localhost/matriz_riesgo/";
         <div class="profile-top me-5">
           <img src="<?= $url ?>dist/img/userv2.jpg">
           <div class="d-flex flex-column text-left ms-2">
-            <p>Brian Tipismana</p>
-            <span>Administrador</span>
+            <p><?=$_SESSION['fullname']?></p>
+            <span>Usuario</span>
           </div>
 
         </div>
