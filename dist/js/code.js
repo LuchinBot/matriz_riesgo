@@ -1,24 +1,89 @@
-var state = parseInt(sessionStorage.getItem("state")) || 0;
-if (state == 1) {
-    $('#hello').css('display', 'none');
-}
+
 $(document).ready(function () {
-    if (state == 1) {
-        base_show();
-    }
+    $('input').attr('autocomplete', 'off');
 
     //Code ajax
-    $('.edit-matriz').click(function () {
-        var id = $(this).attr('id');
-        console.log(id);
+    var id = 0;
+    $('.btn-id').on('click', function () {
+        id = $(this).attr('id');
+        //Petición ajax al servidor{
         $.ajax({
-            type: "POST",
-            url: "ajax/matriz.php?id=" + id,
-            success: function (respuesta) {
-                $("#edit .modal-body").html(respuesta);
+            type: "GET",
+            url: "dist/ajax/matriz?id=" + id,
+            success: function (data) {
+                $('.modal .body-wrapper').html(data);
             }
         });
+
     });
+    $('.generate').on('click', function () {
+        id = $(this).attr('id');
+        //Petición ajax al servidor{
+        $.ajax({
+            type: "GET",
+            url: "dist/ajax/matriz?generate=" + id,
+            success: function (data) {
+                $('.generate-matriz').fadeIn('slow', function () {
+                    setTimeout(function () {
+                        window.location = "matriz";
+                    }, 10000);
+                });
+            }
+        });
+
+    });
+
+    $('.btn-view').on('click', function () {
+        id = $(this).attr('id');
+        //Petición ajax al servidor{
+        $.ajax({
+            type: "GET",
+            url: "dist/ajax/matriz?view=" + id,
+            success: function (data) {
+                $('.modal .body-wrapper').html(data);
+            }
+        });
+
+    });
+
+    $('.btn-matriz').on('click', function () {
+        id = $(this).attr('id');
+        //Petición ajax al servidor{
+        $.ajax({
+            type: "GET",
+            url: "dist/ajax/matriz?matriz=" + id,
+            success: function (data) {
+                $('.modal .body-wrapper').html(data);
+            }
+        });
+
+    });
+    $('.btn-event-control').on('click', function () {
+        id = $(this).attr('id');
+        //Petición ajax al servidor{
+        $.ajax({
+            type: "GET",
+            url: "dist/ajax/event?id=" + id,
+            success: function (data) {
+                $('.modal .body-wrapper').html(data);
+            }
+        });
+
+    });
+
+    $('.btn-control').on('click', function () {
+        id = $(this).attr('id');
+        //Petición ajax al servidor{
+        $.ajax({
+            type: "GET",
+            url: "dist/ajax/control?id=" + id,
+            success: function (data) {
+                $('.modal .body-wrapper').html(data);
+            }
+        });
+
+    });
+
     var x = 1;
     $('.scroll').click(function () {
         if (x == 1) {
@@ -35,19 +100,11 @@ $(document).ready(function () {
         state = 1;
         sessionStorage.setItem("state", state);
         base_show();
+        console.log('hola');
 
 
     });
 
-    function base_show() {
-        $('#hello').hide();
-        $('#profile').slideToggle();
-        $('.layout-end').slideToggle();
-        $('.layout-start').css({
-            'width': '30%',
-            'justify-content': 'start',
-            'box-shadow': 'rgba(17, 17, 26, 0.1) 0px 1px 0px, rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 48px',
-            'border-radius':'20px'
-        });
-    }
+    
+
 });

@@ -1,9 +1,28 @@
 /*GENERAL*/
 body {
-    font-family: 'Lato', sans-serif;
+    font-family: 'Prompt', sans-serif !important;
     font-size: 14px !important;
     user-select: none;
     background-color: #E8EDEF !important;
+}
+.valores_matriz input{
+    text-align: center !important;
+}
+input, textarea, select{
+    font-weight: 200 !important;
+}
+input:focus{
+    outline: none !important;
+    box-shadow: none !important;
+}
+textarea{
+    border: 0 !important;
+    outline: none !important;
+    box-shadow: none !important;
+}
+textarea:focus{
+    outline: none !important;
+    box-shadow: none !important;
 }
 
 button {
@@ -17,6 +36,118 @@ button:focus {
     box-shadow: none !important;
     border: none !important;
 }
+.form-floating label{
+    color: #909A9F;
+    font-size: 12px !important;
+    font-weight: 600 !important;
+}
+/*LOADING PAGE*/
+.loader-page {
+    position: fixed;
+    z-index: 25000;
+    background: rgb(255, 255, 255);
+    left: 0px;
+    top: 0px;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all .3s ease;
+}
+
+.loader-page::before {
+    content: "";
+    position: absolute;
+    border: 2px solid #974C7E;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    box-sizing: border-box;
+    border-left: 2px solid rgba(50, 150, 176, 0);
+    border-top: 2px solid rgba(50, 150, 176, 0);
+    animation: rotarload 1s linear infinite;
+    transform: rotate(0deg);
+}
+
+@keyframes rotarload {
+    0% {
+        transform: rotate(0deg)
+    }
+
+    100% {
+        transform: rotate(360deg)
+    }
+}
+
+.loader-page::after {
+    content: "";
+    position: absolute;
+    border: 2px solid #974C7E;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    box-sizing: border-box;
+    border-left: 2px solid rgba(50, 150, 176, 0);
+    border-top: 2px solid rgba(50, 150, 176, 0);
+    animation: rotarload 1s ease-out infinite;
+    transform: rotate(0deg);
+}
+
+/*LOADING PAGE*/
+.generate-matriz {
+    position: fixed;
+    z-index: 25000;
+    background: rgb(255, 255, 255);
+    left: 0px;
+    top: 0px;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all .3s ease;
+}
+
+.generate-matriz::before {
+    content: "";
+    position: absolute;
+    border: 2px solid #26872f;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    box-sizing: border-box;
+    border-left: 2px solid rgba(50, 150, 176, 0);
+    border-top: 2px solid rgba(50, 150, 176, 0);
+    animation: rotarload 1s linear infinite;
+    transform: rotate(0deg);
+}
+
+@keyframes rotarload {
+    0% {
+        transform: rotate(0deg)
+    }
+
+    100% {
+        transform: rotate(360deg)
+    }
+}
+
+.generate-matriz::after {
+    content: "";
+    position: absolute;
+    border: 2px solid #26872f;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    box-sizing: border-box;
+    border-left: 2px solid rgba(50, 150, 176, 0);
+    border-top: 2px solid rgba(50, 150, 176, 0);
+    animation: rotarload 1s ease-out infinite;
+    transform: rotate(0deg);
+}
+
+
 
 
 /*OTHER*/
@@ -65,10 +196,12 @@ button:focus {
 
 .main-login {
     box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 50px;
-    border-radius: 20px;
+    border-radius: 10px;
     position: relative;
     width: 400px;
     z-index: 100;
+    border: 4px solid #007bff7a;
+
 }
 
 .scroll-login {
@@ -109,9 +242,9 @@ button:focus {
 .form-control-login {
     text-transform: uppercase !important;
     width: 100%;
-    padding: 5px 5px 5px 30px;
+    padding: 10px 5px 10px 5px;
     border: none;
-    text-align: left;
+    text-align: center;
     color: #33454C;
     border-bottom: 1px solid #33454C;
     animation: changeBorderColor 1s ease-in-out infinite;
@@ -156,7 +289,7 @@ button:focus {
     justify-content: end;
 }
 
-.error {
+.error-btn {
     width: 45px;
     height: 45px;
     border-radius: 50px;
@@ -168,11 +301,12 @@ button:focus {
     color: #E91E63;
 }
 
-.error i {
+.error-btn i {
     animation: spin 3s linear infinite;
     transform-origin: center;
 
 }
+
 
 @keyframes spin {
     0% {
@@ -188,16 +322,20 @@ button:focus {
     }
 }
 
+.error {
+    font-size:0.7rem;
+    font-weight: 200 !important;
+    color: #8c2424;
+}
+
 /*PRINCIPAL PAGE*/
 .layout {
-    width: 1200px;
-    max-height: 600px;
-    display: inline-flex;
-    flex-direction: row;
+    width: 1000px;
+    display: flex;
+    flex-direction: column;
 }
 
 .layout-start {
-    height: fit-content;
     padding: 20px 0px 20px 0px;
     display: flex;
     justify-content: center;
@@ -205,8 +343,11 @@ button:focus {
 }
 
 .layout-end {
+    height: 500px;
+    border-radius: 10px;
+    background-color: #fff;
     overflow-y: scroll;
-    width: 70%;
+    width: 100%;
 }
 
 .layout-end::-webkit-scrollbar {
@@ -252,8 +393,30 @@ button:focus {
     background-color: #007CFF;
     font-size: 1.5rem;
 }
-
+.btn-moved i{
+    animation: welcome 4s linear infinite
+}
+@keyframes welcome {
+    0%{
+        transform: scale(1);
+    }
+    50%{
+        transform: scale(1.2);
+    }
+    100%{
+        transform: scale(1);
+    }
+}
 /*PROFILE*/
+#profile{
+    border-radius: 10px;
+    width: 100%;
+    padding: 20px;
+    box-sizing: border-box;
+    background-color: #fff;
+    display: flex;
+    justify-content: space-between;
+}
 .profile-top {
     display: flex;
     justify-content: center;
@@ -261,9 +424,11 @@ button:focus {
 }
 
 .profile-top img {
-    width: 100px;
-    height: 100px;
+    width: 50px;
+    height: 50px;
     border-radius: 50%;
+    border: 4px solid #28a7467b;
+    box-shadow: rgba(0, 0, 0, 0.15) 0px 15px 25px, rgba(0, 0, 0, 0.05) 0px 5px 10px;
 }
 
 .profile-top p {
@@ -280,14 +445,20 @@ button:focus {
 }
 
 .navbar-profile {
+    margin: 0;
+    padding: 0;
     list-style: none !important;
-    margin: 20px 20px 20px 20px;
-    padding: 10px 30px 10px 30px;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
 }
-
-.navbar-profile li {
+.navbar-profile *{
+    text-decoration: none !important;
+    font-size: 12px !important;
+}
+.navbar-profile li{
+    cursor: pointer;
+    font-weight: 700;
+    color: #007CFF;
     background-color: #ffffff6c;
     border-radius: 50px;
     display: flex;
@@ -296,15 +467,17 @@ button:focus {
     padding: 5px;
     margin: 5px;
 }
-
+.navbar-profile li:hover{
+    opacity: 0.8;
+}
 .navbar-profile li span {
+    background-color: rgb(34, 255, 0);
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 50px;
-    height: 50px;
+    width: 30px;
+    height:30px;
     color: #fff;
-    font-size: 20px;
     margin-right: 10px;
     box-shadow: #32325d40 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
     border-radius: 50px;
@@ -314,4 +487,17 @@ button:focus {
     font-weight: 600;
     text-align: center;
     color: #1d1d34dc;
+}
+#notfound{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+/*DATABALES*/
+.dataTables_length,
+.dataTables_filter label,
+.dataTables_info {
+    font-weight: 200 !important;
+    color: #33454C !important;
 }

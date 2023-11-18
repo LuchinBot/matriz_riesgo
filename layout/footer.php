@@ -1,9 +1,57 @@
+</div>
+</div>
+<div class="loader-page">
+    <i class="fa-regular fa-face-laugh-beam text-primary fs-3"></i>
+</div>
 
-<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js" integrity="sha384-+sLIOodYLS7CIrQpBjl+C7nPvqq+FbNUBDunl/OZv93DB7Ln/533i8e/mZXLi/P+" crossorigin="anonymous"></script>
+<script src="<?= $url ?>dist/plugins/popper/popper.min.js"></script>
+<script src="<?= $url ?>dist/plugins/bootstrap/bootstrap.min.js"></script>
+<script src="<?= $url ?>dist/plugins/jquery/jquery.min.js"></script>
+<script src="<?= $url ?>dist/plugins/summernote/summernote-bs4.min.js"></script>
+<script src="<?= $url ?>dist/plugins/select2/select2.min.js"></script>
+<script src="<?= $url ?>dist/plugins/datatables/jquery.dataTables.js"></script>
+<script src="<?= $url ?>dist/plugins/jquery-validate/jquery.validate.min.js"></script>
 
-<script src="<?= $url ?>dist/js/jquery-3.7.1.min.js"></script>
 <script src="<?= $url ?>dist/js/code.js"></script>
+<script>
+    $(document).ready(function() {
+        $('.select2').select2();
+        $("#validateForm").validate({});
+        $('#myTable').DataTable({
+
+            language: {
+                "decimal": "",
+                "emptyTable": "No hay información",
+                "info": "Mostrando _START_ a _END_ de _TOTAL_ Entradas",
+                "infoEmpty": "Mostrando 0 to 0 of 0 Entradas",
+                "infoFiltered": "(Filtrado de _MAX_ total entradas)",
+                "infoPostFix": "",
+                "thousands": ",",
+                "lengthMenu": "Mostrar _MENU_ Entradas",
+                "loadingRecords": "Cargando...",
+                "processing": "Procesando...",
+                "search": "Buscar:",
+                "zeroRecords": "Sin resultados encontrados",
+                "paginate": {
+                    "first": "Primero",
+                    "last": "Ultimo",
+                    "next": "Siguiente",
+                    "previous": "Anterior"
+                }
+            }
+        });
+
+    });
+    $(window).on('load', function() {
+        setTimeout(function() {
+            $(".loader-page").css({
+                visibility: "hidden",
+                opacity: "0"
+            })
+        }, 2000);
+
+    });
+</script>
+</body>
 
 </html>
