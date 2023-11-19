@@ -17,4 +17,4 @@
     RewriteRule ^(.*)$ index.php [L]
 </IfModule>
 # Redirigir solicitudes no encontradas a la página de inicio
-ErrorDocument 404 /index
+ErrorDocument 404 /matriz

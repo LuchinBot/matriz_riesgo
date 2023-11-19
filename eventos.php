@@ -1,4 +1,5 @@
 <?php
+$title = "Eventos";
 include "layout/header.php";
 if (!isset($_SESSION['user'])) {
   header('Location: login');
@@ -74,8 +75,8 @@ $eventos = $stmt->fetchAll(PDO::FETCH_OBJ);
               <td class="text-center"><?= $i->name_level ?></td>
               <td>
                 <div class="d-flex justify-content-center">
-                  <button type="button" class="btn btn-primary btn-event-control me-2" data-bs-toggle="modal" data-bs-target="#ModalAddControl" id="<?= $i->idevent  ?>"><i class="fa-solid fa-shield-halved"></i></button>
-                  <a href="dist/ajax/matriz?delete=<?= $i->idevent ?>" class="btn text-white bg-danger"><i class="fa-solid fa-trash"></i></a>
+                  <button type="button" class="btn btn-primary btn-event-control me-2" data-bs-toggle="modal" data-bs-target="#ModalAddControl2" id="<?= $i->idevent  ?>"><i class="fa-solid fa-shield-halved"></i></button>
+                  <a href="dist/ajax/event?delete=<?= $i->idevent ?>" class="btn text-white bg-danger"><i class="fa-solid fa-trash"></i></a>
                 </div>
               </td>
             </tr>
@@ -90,7 +91,7 @@ $eventos = $stmt->fetchAll(PDO::FETCH_OBJ);
 
 
 <!-- Modal -->
-<div class="modal fade" id="ModalAddControl" data-bs-backdrop="static" data-bs-keyboard="false" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+<div class="modal fade" id="ModalAddControl2" data-bs-backdrop="static" data-bs-keyboard="false" aria-labelledby="staticBackdropLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header">

@@ -57,7 +57,13 @@ if (isset($_GET['id'])) {
         </fieldset>
     </form>
 
-<?php } ?>
+<?php }if (isset($_GET['delete'])) {
+
+//Listado
+$stmt = $base->prepare('DELETE FROM events where idevent = ?');
+$data = $stmt->execute(array($_GET['delete']));
+echo '<script>window.location.href = "' . $url . 'controles";</script>';
+} ?>
 
 <script src="<?= $url ?>dist/plugins/select2/select2.min.js"></script>
 

@@ -93,7 +93,7 @@ if (isset($_GET['generate'])) {
 if (isset($_GET['delete'])) {
 
     //Listado
-    $stmt = $base->prepare('UPDATE matriz set state_matriz = 0 where idmatriz = ?');
+    $stmt = $base->prepare('DELETE FROM matriz where idmatriz = ?');
     $data = $stmt->execute(array($_GET['delete']));
     echo '<script>window.location.href = "' . $url . 'matriz";</script>';
 }
@@ -116,31 +116,6 @@ if (isset($_GET['view'])) {
     <form method="post" action="dist/ajax/save_matriz" class="valores_matriz">
         <div class="row">
             <div class="col-md-6">
-                <h6 class="text-center text-secondary text-uppercase fw-bold">Impactos</h6>
-                <table class="table table-bordered">
-                    <thead>
-                        <tr>
-                            <th class="fw-light text-center">Nombre</th>
-                            <th class="fw-light text-center">Valor</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php foreach ($cols as $impacto) : ?>
-                            <tr>
-                                <td>
-                                    <input type="text" minlength="4" name="nombre_impacto[]" required class="w-100" value="<?php echo $impacto->name_impacto; ?>">
-                                    <input type="hidden" name="id_impacto[]" value="<?php echo $impacto->idimpacto; ?>">
-                                </td>
-                                <td style="width: 25%;">
-                                    <input type="number" min="1" name="valor_impacto[]" required class="w-100" value="<?php echo $impacto->value_impacto; ?>">
-                                </td>
-                            </tr>
-                        <?php endforeach; ?>
-                    </tbody>
-                </table>
-            </div>
-
-            <div class="col-md-6">
                 <h6 class="text-center text-secondary text-uppercase fw-bold">Probabilidades</h6>
                 <table class="table table-bordered">
                     <thead>
@@ -158,6 +133,30 @@ if (isset($_GET['view'])) {
                                 </td>
                                 <td style="width: 25%;">
                                     <input type="number" min="1" name="valor_probabilidad[]" required class="w-100" value="<?php echo $probabilidad->value_probabilidad; ?>">
+                                </td>
+                            </tr>
+                        <?php endforeach; ?>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-md-6">
+                <h6 class="text-center text-secondary text-uppercase fw-bold">Impactos</h6>
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th class="fw-light text-center">Nombre</th>
+                            <th class="fw-light text-center">Valor</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php foreach ($cols as $impacto) : ?>
+                            <tr>
+                                <td>
+                                    <input type="text" minlength="4" name="nombre_impacto[]" required class="w-100" value="<?php echo $impacto->name_impacto; ?>">
+                                    <input type="hidden" name="id_impacto[]" value="<?php echo $impacto->idimpacto; ?>">
+                                </td>
+                                <td style="width: 25%;">
+                                    <input type="number" min="1" name="valor_impacto[]" required class="w-100" value="<?php echo $impacto->value_impacto; ?>">
                                 </td>
                             </tr>
                         <?php endforeach; ?>
@@ -321,7 +320,7 @@ if (isset($_GET['matriz'])) {
                 $('.probabilidad_event').each(function() {
                     var selectedOption = $(this).children('option:selected');
                     probabilidad = selectedOption.attr('id');
-                    
+
                 });
                 $('.impacto_event').each(function() {
                     var selectedOption = $(this).children('option:selected');

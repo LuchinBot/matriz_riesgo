@@ -35,7 +35,7 @@ if (isset($_GET['id'])) {
 if (isset($_GET['delete'])) {
 
     //Listado
-    $stmt = $base->prepare('UPDATE control_iso set state_control = 0 where idcontrol_iso = ?');
+    $stmt = $base->prepare('DELETE FROM control_iso where idcontrol_iso = ?');
     $data = $stmt->execute(array($_GET['delete']));
     echo '<script>window.location.href = "' . $url . 'controles";</script>';
 } ?>

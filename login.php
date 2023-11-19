@@ -1,5 +1,6 @@
 <?php
 $login = 1;
+$title = "Loguearse";
 include "layout/header.php";
 if (isset($_SESSION['user'])) {
   header('Location: matriz');

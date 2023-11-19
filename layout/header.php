@@ -12,7 +12,7 @@ session_start();
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" href="<?= $url ?>dist/img/unsm.png" type="image/icon">
-  <title>Matriz | Dashboard</title>
+  <title><?=$title?> | Dashboard</title>
 
   <!--Font google-->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -37,16 +37,16 @@ session_start();
  <?php if(!isset($login)){?>
   <div class="wrapper" >
     <div class="layout">
-      <div class="d-flex bg-white mb-2 py-3 px-2 justify-content-center rounded">
-        <div class="profile-top me-5">
+      <div class="d-flex bg-white mb-2 py-3 px-2 justify-content-between rounded">
+        <div class="profile-top ms-5">
           <img src="<?= $url ?>dist/img/userv2.jpg">
           <div class="d-flex flex-column text-left ms-2">
             <p><?=$_SESSION['fullname']?></p>
-            <span>Usuario</span>
+            <span>Conectado</span>
           </div>
 
         </div>
-        <ul class="navbar-profile">
+        <ul class="navbar-profile me-5">
           <li>
             <span data-bs-toggle="modal" data-bs-target="#ModalAddMatriz">
               <i class="fa-solid fa-plus"></i>
