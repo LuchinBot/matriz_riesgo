@@ -94,8 +94,8 @@ $dimension = $stmt->fetchAll(PDO::FETCH_OBJ);
                   <?php if ($v1->generate_matriz == 0) { ?>
                     <button id="<?= $v1->idmatriz ?>" class="btn text-white bg-info me-2 generate"><i class="fa-solid fa-rotate"></i></button>
                   <?php } else { ?>
-                    <button type="button" class="btn btn-warning btn-view me-2" data-bs-toggle="modal" data-bs-target="#ModalDateMatriz" id="<?= $v1->idmatriz  ?>"><i class="fa-solid fa-eye"></i></button>
-                    <button type="button" class="btn btn-success btn-matriz me-2" data-bs-toggle="modal" data-bs-target="#ModalViewMatriz" id="<?= $v1->idmatriz  ?>"><i class="fa-solid fa-table-cells"></i></button>
+                    <button type="button" class="btn btn-warning btn-view me-2" data-bs-toggle="modal" data-bs-target="#ModalDateMatriz" id="<?= $v1->idmatriz  ?>"><i class="fa-solid fa-table-cells"></i></button>
+                    <button type="button" class="btn btn-success btn-matriz me-2" data-bs-toggle="modal" data-bs-target="#ModalViewMatriz" id="<?= $v1->idmatriz  ?>"><i class="fa-solid fa-eye"></i></button>
                   <?php } ?>
                   <a href="dist/ajax/matriz?delete=<?= $v1->idmatriz ?>" class="btn text-white bg-danger"><i class="fa-solid fa-trash"></i></a>
                 </div>
