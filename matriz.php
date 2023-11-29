@@ -73,11 +73,15 @@ $dimension = $stmt->fetchAll(PDO::FETCH_OBJ);
               <td>
                 <?php
                 $v = 1;
+                $count = 0;
                 foreach ($data2 as $v2) {
                   if ($v1->idmatriz == $v2->idmatriz) {
-                    echo '<i class="text-success">' . $v2->name_control . '</i><br>';
                     $v = 0;
+                    $count++;
                   }
+                }
+                if ($v == 0) {
+                  echo '<i class="text-success fw-bold">Existen '.$count.' controles</i>';
                 }
                 if ($v == 1) {
                   echo '<i class="text-secondary">No existen controles</i>';
