@@ -58,6 +58,7 @@ $eventos = $stmt->fetchAll(PDO::FETCH_OBJ);
           <tr>
             <th class="text-center">N°</th>
             <th class="text-center">Evento</th>
+            <th class="text-center">Matriz</th>
             <th class="text-center">Probabilidad</th>
             <th class="text-center">Impacto</th>
             <th class="text-center">Riesgo</th>
@@ -70,6 +71,7 @@ $eventos = $stmt->fetchAll(PDO::FETCH_OBJ);
             <tr class="gradeX">
               <td class="text-center"><?= $c ?></td>
               <td class="text-center"><?= $i->name_event ?></td>
+              <td class="text-center"><?= $i->title_matriz ?></td>
               <td class="text-center"><?= $i->name_probabilidad ?></td>
               <td class="text-center"><?= $i->name_impacto ?></td>
               <td class="text-center"><?= $i->name_level ?></td>
