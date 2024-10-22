@@ -1,6 +1,6 @@
 <?php
     $host = 'localhost';
-    $db = 'db_matriz';
+    $db = 'db_matriz_iso';
     $user = 'root';
     $password = '';
     $charset ='utf8';

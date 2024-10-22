@@ -46,7 +46,6 @@ $stmt = $base->prepare('SELECT * from dimension where state_dimension= 1 ');
 $dimension = $stmt->execute();
 $dimension = $stmt->fetchAll(PDO::FETCH_OBJ);
 
-
 ?>
 
 <div class="layout-end p-4">

@@ -1,7 +1,7 @@
 <?php
 require('conexion.php');
-$autor = "Brian Tipismana";
-$url = "http://localhost/matriz_riesgo/";
+$autor = "Tony";
+$url = "http://matriz_riesgo.test/";
 session_start();
 
 ?>
@@ -21,6 +21,7 @@ session_start();
 
   <!--Styles-->
   <link href="<?= $url ?>dist/css/important.css" rel="stylesheet">
+  <link href="<?= $url ?>dist/css/login.css" rel="stylesheet">
   <link href="<?= $url ?>dist/plugins/bootstrap/bootstrap.min.css" rel="stylesheet">
   <link href="<?= $url ?>dist/plugins/select2/select2.min.css" rel="stylesheet">
   <link href="<?= $url ?>dist/plugins/adminlte/adminlte.min.css" rel="stylesheet">
@@ -30,7 +31,6 @@ session_start();
   <link href="<?= $url ?>dist/plugins/fontawesome/css/brands.min.css" rel="stylesheet">
   <link href="<?= $url ?>dist/plugins/summernote/summernote-bs4.min.css" rel="stylesheet">
   <link href="<?= $url ?>dist/plugins/datatables/jquery.dataTables.css" rel="stylesheet">
-
 </head>
 
 <body>

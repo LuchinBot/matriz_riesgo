@@ -1,8 +1,10 @@
 </div>
 </div>
+<!--
 <div class="loader-page">
     <i class="fa-regular fa-face-laugh-beam text-primary fs-3"></i>
 </div>
+-->
 
 <script src="<?= $url ?>dist/plugins/popper/popper.min.js"></script>
 <script src="<?= $url ?>dist/plugins/bootstrap/bootstrap.min.js"></script>
@@ -13,6 +15,7 @@
 <script src="<?= $url ?>dist/plugins/jquery-validate/jquery.validate.min.js"></script>
 
 <script src="<?= $url ?>dist/js/code.js"></script>
+<script src="<?= $url ?>dist/js/login.js"></script>
 <script>
     $(document).ready(function() {
         $('.select2').select2();
