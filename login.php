@@ -5,11 +5,19 @@ include "layout/header.php";
 
 if (isset($_SESSION['user'])) {
   header('Location: matriz');
-  exit(); // Asegúrate de hacer un exit después de redirigir
+  exit();
 }
 
 ?>
-
+<style>
+  .wrapper {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+</style>
 <div class="wrapper">
   <div class="py-3 px-5 bg-white main-login">
     <div class="mb-5 b-2">
@@ -34,6 +42,17 @@ if (isset($_SESSION['user'])) {
         Iniciar sesión
       </button>
     </form>
+  </div>
+  <div class="py-3 px-5 bg-white main-login-intentes">
+    <div class="mb-5 b-2">
+      <img src="<?= $url ?>dist/img/intentes.png" alt="">
+      <h1 class="title-captcha text-center text-dark">YOP'</h1>
+      <p>
+        <strong class="text-danger">Demasiados intentos</strong>
+        <br>
+        <small class="text-muted">Comunicate con el administrador</small>
+      </p>
+    </div>
   </div>
 </div>
 <div class="captchaLogin">

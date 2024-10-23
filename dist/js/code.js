@@ -82,6 +82,18 @@ $(document).ready(function () {
         });
 
     });
+    $('.btn-user').on('click', function () {
+        id = $(this).attr('id');
+        //Petición ajax al servidor{
+        $.ajax({
+            type: "GET",
+            url: "dist/ajax/user?id=" + id,
+            success: function (data) {
+                $('.modal .body-wrapper').html(data);
+            }
+        });
+
+    });
 
     var x = 1;
     $('.scroll').click(function () {
@@ -104,6 +116,22 @@ $(document).ready(function () {
 
     });
 
-    
+    var times = false;
+    $('.times').click(function () {
+        if (times) {
+            $('.times').find('i').removeClass('fa-caret-left').addClass('fa-caret-right');
+
+            $('.float-left').css('animation', 'traslate1 1s forwards');
+            times = false;
+
+        } else {
+            $('.times').find('i').removeClass('fa-caret-right').addClass('fa-caret-left');
+
+
+            $('.float-left').css('animation', 'traslate2 1s forwards');
+            times = true;
+        }
+    });
+
 
 });

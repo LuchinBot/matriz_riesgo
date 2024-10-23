@@ -1,6 +1,12 @@
 
 $(document).ready(function () {
     var captcha = false;
+    let intentos = localStorage.getItem('intentos');
+    console.log(intentos);
+    if (intentos == 3) {
+        $('.main-login').remove();
+        $('.main-login-intentes').show();
+    }
     $('.btn-login').on('click', function () {
         var user = $('input[name="user"]').val();
         var key = $('input[name="key"]').val();
@@ -15,25 +21,29 @@ $(document).ready(function () {
                     username: $('input[name="user"]').val(),
                     keyword: $('input[name="key"]').val()
                 };
-                
+
                 $.ajax({
                     type: "POST",
                     url: "dist/ajax/login",
-                    data: dataForm,  // Enviar el objeto directamente
+                    data: dataForm,
                     dataType: "json",
                     success: function (data) {
                         if (data.success) {
-                            window.location.href = url+'matriz';
+                            window.location.href = url + 'matriz';
                         } else {
+                            // almacenar intentos
+                            intentos++;
+                            localStorage.setItem('intentos', intentos);
                             $('.alert-login').html('<div class="alert alert-danger text-center">' + data.message + '</div>');
+                            if (intentos >= 3) {
+                                $('.main-login').html('<div class="alert alert-danger text-center">Intentos agotados</div>');
+                            }
                         }
                     },
-
                     error: function (data) {
                         console.log('Error en la solicitud:', data);
                     }
                 });
-                
             }
         } else {
             $('.alert-login').html('<div class="alert alert-danger text-center">Todos los campos son obligatorios</div>');
@@ -71,4 +81,5 @@ $(document).ready(function () {
             $('.captchaLogin').show();
         }
     });
+
 });

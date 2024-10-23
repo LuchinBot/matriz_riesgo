@@ -2,10 +2,9 @@
 </div>
 <!--
 <div class="loader-page">
-    <i class="fa-regular fa-face-laugh-beam text-primary fs-3"></i>
+    <i class="fa fa-reload fs-3"></i>
 </div>
 -->
-
 <script src="<?= $url ?>dist/plugins/popper/popper.min.js"></script>
 <script src="<?= $url ?>dist/plugins/bootstrap/bootstrap.min.js"></script>
 <script src="<?= $url ?>dist/plugins/jquery/jquery.min.js"></script>
@@ -51,7 +50,7 @@
                 visibility: "hidden",
                 opacity: "0"
             })
-        }, 2000);
+        }, 1000);
 
     });
 </script>

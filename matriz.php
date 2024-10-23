@@ -11,7 +11,7 @@ if (isset($_POST['addMatriz'])) {
   $d = $_POST['descripcion_matriz'];
 
   $stmt = $base->prepare('INSERT INTO matriz (iddimension,iduser, title_matriz, text_matriz) VALUES (?,?, ?,?)');
-  $result = $stmt->execute(array($a, $b, $c,$d));
+  $result = $stmt->execute(array($a, $b, $c, $d));
 
   if ($result) {
     echo '<script type="text/javascript">window.location = "' . $url . 'matriz";</script>';
@@ -52,6 +52,12 @@ $dimension = $stmt->fetchAll(PDO::FETCH_OBJ);
   <!--COLLAPSE MATRIZ-->
   <div>
     <div class="card-body">
+      <div class="d-flex mb-4 justify-content-between py-1 border-bottom">
+        <h3 class="fw-bold">Matrices</h3>
+        <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#ModalAddMatriz">
+          <i class="fa-solid fa-plus"></i>
+        </button>
+      </div>
       <table id="myTable" class="table table-bordered table-striped">
         <thead>
           <tr>
@@ -80,7 +86,7 @@ $dimension = $stmt->fetchAll(PDO::FETCH_OBJ);
                   }
                 }
                 if ($v == 0) {
-                  echo '<i class="text-success fw-bold">Existen '.$count.' controles</i>';
+                  echo '<i class="text-success fw-bold">Existen ' . $count . ' controles</i>';
                 }
                 if ($v == 1) {
                   echo '<i class="text-secondary">No existen controles</i>';

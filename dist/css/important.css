@@ -1,29 +1,36 @@
 /*GENERAL*/
 body {
-    font-family: 'Prompt', sans-serif !important;
+    font-family: "Manrope", sans-serif !important;
     font-size: 14px !important;
     user-select: none;
-    background-color: #E8EDEF !important;
+    background-color: #2c2c2c !important;
 }
-.valores_matriz input{
+
+.valores_matriz input {
     border-radius: 0 !important;
     padding-top: 5px;
     padding-bottom: 5px;
     font-size: 20px;
     text-align: center !important;
 }
-input, textarea, select{
+
+input,
+textarea,
+select {
     font-weight: 200 !important;
 }
-input:focus{
+
+input:focus {
     outline: none !important;
     box-shadow: none !important;
 }
-textarea{
+
+textarea {
     outline: none !important;
     box-shadow: none !important;
 }
-textarea:focus{
+
+textarea:focus {
     outline: none !important;
     box-shadow: none !important;
 }
@@ -39,10 +46,14 @@ button:focus {
     box-shadow: none !important;
     border: none !important;
 }
-.form-floating label{
+
+.form-floating label {
     color: #909A9F;
     font-size: 12px !important;
     font-weight: 600 !important;
+}
+.select2{
+    width: 100% !important;
 }
 /*LOADING PAGE*/
 .loader-page {
@@ -62,7 +73,7 @@ button:focus {
 .loader-page::before {
     content: "";
     position: absolute;
-    border: 2px solid #974C7E;
+    border: 2px solid #007CFF;
     width: 60px;
     height: 60px;
     border-radius: 50%;
@@ -86,7 +97,7 @@ button:focus {
 .loader-page::after {
     content: "";
     position: absolute;
-    border: 2px solid #974C7E;
+    border: 2px solid #007CFF;
     width: 60px;
     height: 60px;
     border-radius: 50%;
@@ -95,6 +106,22 @@ button:focus {
     border-top: 2px solid rgba(50, 150, 176, 0);
     animation: rotarload 1s ease-out infinite;
     transform: rotate(0deg);
+}
+
+.loader-page i {
+    color: #007CFF;
+    transition: all .3s ease;
+    animation: opacidad 0.7s ease-in-out infinite;
+}
+
+@keyframes opacidad {
+    0% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    }
 }
 
 /*LOADING PAGE*/
@@ -190,16 +217,63 @@ button:focus {
 /*LOGIN*/
 
 .error {
-    font-size:0.7rem;
+    font-size: 0.7rem;
     font-weight: 200 !important;
     color: #8c2424;
 }
 
 /*PRINCIPAL PAGE*/
-.layout {
-    width: 1000px;
+
+
+.float-left {
+    top: 150px;
+    z-index: 7000;
+    padding: 40px;
+    position: fixed;
     display: flex;
     flex-direction: column;
+    background-color: #007CFF;
+    justify-content: space-between;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+    transform: translateX(-83%);
+}
+
+@keyframes traslate1 {
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(-83%);
+    }
+}
+
+@keyframes traslate2 {
+    0% {
+        transform: translateX(-83%);
+    }
+
+    100% {
+        transform: translateX(0%);
+    }
+}
+
+.times {
+    position: absolute;
+    background-color: #007CFF;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    top: 5px;
+    right: 5px;
+    cursor: pointer;
+    border-radius: 10px;
+    font-size: 17px;
+    color: #fff;
 }
 
 .layout-start {
@@ -210,25 +284,10 @@ button:focus {
 }
 
 .layout-end {
-    height: 500px;
+    margin-top: 50px;
     border-radius: 10px;
     background-color: #fff;
-    overflow-y: scroll;
     width: 100%;
-}
-
-.layout-end::-webkit-scrollbar {
-    width: 10px;
-}
-
-.layout-end::-webkit-scrollbar-thumb {
-    background-color: #BABCC5;
-    border-radius: 5px;
-
-}
-
-.layout-end::-webkit-scrollbar-thumb:hover {
-    background-color: #555;
 }
 
 .layout-start .start-body {
@@ -237,7 +296,6 @@ button:focus {
     justify-content: center;
     text-align: center;
     text-transform: uppercase;
-    width: 400px;
 }
 
 .layout-start .start-body h4 {
@@ -260,22 +318,27 @@ button:focus {
     background-color: #007CFF;
     font-size: 1.5rem;
 }
-.btn-moved i{
+
+.btn-moved i {
     animation: welcome 4s linear infinite
 }
+
 @keyframes welcome {
-    0%{
+    0% {
         transform: scale(1);
     }
-    50%{
+
+    50% {
         transform: scale(1.2);
     }
-    100%{
+
+    100% {
         transform: scale(1);
     }
 }
+
 /*PROFILE*/
-#profile{
+#profile {
     border-radius: 10px;
     width: 100%;
     padding: 20px;
@@ -284,9 +347,10 @@ button:focus {
     display: flex;
     justify-content: space-between;
 }
+
 .profile-top {
     display: flex;
-    justify-content: center;
+    justify-content: start;
     align-items: center;
 }
 
@@ -299,6 +363,8 @@ button:focus {
 }
 
 .profile-top p {
+    color: #fff;
+    width: min-content;
     margin: 0;
     font-weight: 800;
 }
@@ -312,42 +378,47 @@ button:focus {
 }
 
 .navbar-profile {
-    margin: 0;
+    margin: 20px 0px;
     padding: 0;
     list-style: none !important;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
 }
-.navbar-profile *{
+
+.navbar-profile * {
     text-decoration: none !important;
     font-size: 12px !important;
 }
-.navbar-profile li{
+
+.navbar-profile li {
     cursor: pointer;
     font-weight: 700;
-    color: #007CFF;
+    color: #fff;
     background-color: #ffffff6c;
-    border-radius: 50px;
+    border-radius: 5px;
     display: flex;
     justify-content: start;
     align-items: center;
     padding: 5px;
     margin: 5px;
 }
-.navbar-profile li:hover{
+
+.navbar-profile li:hover {
     opacity: 0.8;
 }
+
 .navbar-profile li span {
-    background-color: rgb(34, 255, 0);
+    background-color: rgba(34, 255, 0, 0);
     display: flex;
+    padding: 0px 30px;
     justify-content: center;
     align-items: center;
     width: 30px;
-    height:30px;
+    height: 30px;
     color: #fff;
     margin-right: 10px;
     box-shadow: #32325d40 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
-    border-radius: 50px;
+    border-radius: 5px;
 }
 
 .navbar-profile li button {
@@ -355,12 +426,19 @@ button:focus {
     text-align: center;
     color: #1d1d34dc;
 }
-#notfound{
+
+.navbar-profile li a {
+
+    color: #fff;
+}
+
+#notfound {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100%;
 }
+
 /*DATABALES*/
 .dataTables_length,
 .dataTables_filter label,

@@ -39,6 +39,12 @@ $controles = $stmt->fetchAll(PDO::FETCH_OBJ);
   <!--COLLAPSE Control-->
   <div>
     <div class="card-body">
+      <div class="d-flex mb-4 justify-content-between py-1 border-bottom">
+        <h3 class="fw-bold">Controles</h3>
+        <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#ModalAddControl">
+          <i class="fa-solid fa-plus"></i>
+        </button>
+      </div>
       <table id="myTable" class="table table-bordered table-striped">
         <thead>
           <tr>
@@ -86,7 +92,7 @@ $controles = $stmt->fetchAll(PDO::FETCH_OBJ);
             <div class="modal-body">
               <div class="form-group mb-3">
                 <label for="floatTitle">Correlativo</label>
-                <input type="text" name="correlativo" class="form-control" id="floatTitle" placeholder="1.1.1"  autocomplete="off" required>
+                <input type="text" name="correlativo" class="form-control" id="floatTitle" placeholder="1.1.1" autocomplete="off" required>
               </div>
               <div class="form-group mb-3">
                 <label for="floatTitle2">Control</label>

@@ -9,7 +9,7 @@ if (isset($_POST['addControl'])) {
   $a = $_POST['idmatriz'];
   $b = $_POST['idevent'];
   $c = $_POST['idcontrol'];
-  
+
 
   // Obtener todos los registros actuales
   $stmt_select = $base->prepare('SELECT idcontrol_event, idcontrol FROM control_event WHERE idmatriz = ? AND idevent = ?');
@@ -53,6 +53,9 @@ $eventos = $stmt->fetchAll(PDO::FETCH_OBJ);
   <!--COLLAPSE MATRIZ-->
   <div>
     <div class="card-body">
+      <div class="d-flex mb-4 justify-content-between py-1 border-bottom">
+        <h3 class="fw-bold">Eventos</h3>
+      </div>
       <table id="myTable" class="table table-bordered table-striped">
         <thead>
           <tr>

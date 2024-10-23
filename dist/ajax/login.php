@@ -6,16 +6,31 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $token = $_POST['keyword'];
 
     // Buscar el usuario en la base de datos
-    $stm = $base->prepare('SELECT * FROM user WHERE username=?');
+    $stm = $base->prepare('SELECT * FROM user INNER JOIN profiles ON profiles.idprofile = user.idprofile WHERE user.username=?');
     $stm->execute(array($user));
     $res = $stm->fetch(PDO::FETCH_ASSOC);
 
     // Verificar si el usuario existe y si la contraseña es correcta
     if ($res && password_verify($token, $res['keyword'])) {
-        $_SESSION['user'] = $res['iduser'];
-        $_SESSION['fullname'] = $res['firstname'] . ' ' . $res['lastname'];
-        echo json_encode(['success' => true]);
+        if($res['session_user'] == 0){
+            $_SESSION['user'] = $res['iduser'];
+            $_SESSION['firstname'] = $res['firstname'];
+            $_SESSION['profile'] = $res['name'];
+            $data = [
+                'success' => true
+            ];
+        }else{
+            $data = [
+                'success' => false,
+                'message' => 'El usuario ya se encuentra conectado.'
+            ];
+        }
+        echo json_encode($data);
+       
     } else {
-        echo json_encode(['success' => false, 'message' => 'Usuario o contraseña incorrectos']);
+        echo json_encode([
+            'success' => false,
+            'message' => 'Usuario o contraseña incorrectos'
+        ]);
     }
 }

@@ -1,11 +1,3 @@
-.wrapper {
-    width: 100%;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
 .main-login {
     box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 50px;
     border-radius: 10px;
@@ -34,7 +26,7 @@
 
 .demo-form .form-group-login i {
     position: absolute;
-    left: 20px;
+    left: 10px;
     top: 15px;
     font-size: 18px;
 }
@@ -62,8 +54,8 @@
 
 .alert-login {
     position: absolute;
-    bottom: -65px;
-    opacity: 0.5;
+    top: -180px;
+    opacity: 1;
     transform: scale(0.8);
 }
 
@@ -175,4 +167,19 @@
     right: -65px;
     top: -3px;
     font-weight: 200;
+}
+
+
+.main-login-intentes {
+    display: none;
+    width: 400px;
+    border-radius: 10px;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+}
+
+.main-login-intentes img {
+    width: 100%;
+}
+.main-login-intentes p{
+    text-align: center;
 }
