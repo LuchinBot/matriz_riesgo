@@ -446,3 +446,9 @@ button:focus {
     font-weight: 200 !important;
     color: #33454C !important;
 }
+.valores_matriz input{
+    border: 1px solid gray;
+}
+.valores_matriz .modal-xl{
+    max-width: 1500px !important;
+}

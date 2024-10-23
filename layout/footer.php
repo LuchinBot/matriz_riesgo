@@ -1,10 +1,10 @@
 </div>
 </div>
-<!--
+
 <div class="loader-page">
     <i class="fa fa-reload fs-3"></i>
 </div>
--->
+
 <script src="<?= $url ?>dist/plugins/popper/popper.min.js"></script>
 <script src="<?= $url ?>dist/plugins/bootstrap/bootstrap.min.js"></script>
 <script src="<?= $url ?>dist/plugins/jquery/jquery.min.js"></script>

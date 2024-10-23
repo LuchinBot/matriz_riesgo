@@ -1,8 +1,8 @@
 <?php
 $title = "usuarios";
 include "layout/header.php";
-if (!isset($_SESSION['user']) && $_SESSION['profile'] == 'admin') {
-  header('Location: login');
+if (!isset($_SESSION['user']) && isset($_SESSION['profile']) != 'super') {
+  echo '<script type="text/javascript">window.location = "' . $url . 'login";</script>';
 }
 if (isset($_POST['addUsuario'])) {
   $profile = $_POST['profile'];

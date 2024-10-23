@@ -3,49 +3,63 @@ $title = "Matrices";
 include "layout/header.php";
 if (!isset($_SESSION['user'])) {
   header('Location: login');
-}
-if (isset($_POST['addMatriz'])) {
-  $a = $_POST['iddimension'];
-  $b = $_SESSION['user'];
-  $c = $_POST['titulo_matriz'];
-  $d = $_POST['descripcion_matriz'];
+} else {
 
-  $stmt = $base->prepare('INSERT INTO matriz (iddimension,iduser, title_matriz, text_matriz) VALUES (?,?, ?,?)');
-  $result = $stmt->execute(array($a, $b, $c, $d));
+  echo $_SESSION['user'];
+  if (isset($_POST['addMatriz'])) {
+    $a = $_POST['iddimension'];
+    $b = $_SESSION['user'];
+    $c = $_POST['titulo_matriz'];
+    $d = $_POST['descripcion_matriz'];
 
-  if ($result) {
-    echo '<script type="text/javascript">window.location = "' . $url . 'matriz";</script>';
+    $stmt = $base->prepare('INSERT INTO matriz (iddimension,iduser, title_matriz, text_matriz) VALUES (?,?, ?,?)');
+    $result = $stmt->execute(array($a, $b, $c, $d));
+
+    if ($result) {
+      echo '<script type="text/javascript">window.location = "' . $url . 'matriz";</script>';
+    }
   }
-}
 
-if (isset($_POST['editMatriz'])) {
-  $id = $_POST['idmatriz'];
-  $a = $_POST['iddimension'];
-  $b = $_POST['titulo_matriz'];
-  $c = $_POST['descripcion_matriz'];
+  if (isset($_POST['editMatriz'])) {
+    $id = $_POST['idmatriz'];
+    $a = $_POST['iddimension'];
+    $b = $_POST['titulo_matriz'];
+    $c = $_POST['descripcion_matriz'];
 
-  $stmt = $base->prepare('UPDATE matriz set iddimension=?, title_matriz=?, text_matriz=? where idmatriz = ?');
-  $result = $stmt->execute(array($a, $b, $c, $id));
+    $stmt = $base->prepare('UPDATE matriz set iddimension=?, title_matriz=?, text_matriz=? where idmatriz = ?');
+    $result = $stmt->execute(array($a, $b, $c, $id));
 
-  if ($result) {
-    echo '<script type="text/javascript">window.location = "' . $url . 'matriz";</script>';
+    if ($result) {
+      echo '<script type="text/javascript">window.location = "' . $url . 'matriz";</script>';
+    }
   }
+  if ($_SESSION['profile'] == 'super') {
+    $stmt = $base->prepare('SELECT * from matriz as m inner join dimension as d on(d.iddimension = m.iddimension) where m.state_matriz = 1');
+    $data1 = $stmt->execute();
+    $data1 = $stmt->fetchAll(PDO::FETCH_OBJ);
+
+    $stmt = $base->prepare('SELECT * from control_event as con inner join
+    matriz as ma on(ma.idmatriz=con.idmatriz) inner join
+    control_iso as coni on(coni.idcontrol_iso=con.idcontrol)');
+    $data2 = $stmt->execute();
+    $data2 = $stmt->fetchAll(PDO::FETCH_OBJ);
+  } else {
+    $stmt = $base->prepare('SELECT * from matriz as m inner join dimension as d on(d.iddimension = m.iddimension) where m.iduser = ? and m.state_matriz = 1');
+    $data1 = $stmt->execute(array($_SESSION['user']));
+    $data1 = $stmt->fetchAll(PDO::FETCH_OBJ);
+
+    $stmt = $base->prepare('SELECT * from control_event as con inner join
+    matriz as ma on(ma.idmatriz=con.idmatriz) inner join
+    control_iso as coni on(coni.idcontrol_iso=con.idcontrol)
+    where ma.iduser = ?');
+    $data2 = $stmt->execute(array($_SESSION['user']));
+    $data2 = $stmt->fetchAll(PDO::FETCH_OBJ);
+  }
+
+  $stmt = $base->prepare('SELECT * from dimension where state_dimension= 1 ');
+  $dimension = $stmt->execute();
+  $dimension = $stmt->fetchAll(PDO::FETCH_OBJ);
 }
-
-$stmt = $base->prepare('SELECT * from matriz as m inner join dimension as d on(d.iddimension = m.iddimension) where iduser = ? and m.state_matriz = 1 ');
-$data1 = $stmt->execute(array($_SESSION['user']));
-$data1 = $stmt->fetchAll(PDO::FETCH_OBJ);
-
-$stmt = $base->prepare('SELECT * from control_event as con inner join
-                        matriz as ma on(ma.idmatriz=con.idmatriz) inner join
-                        control_iso as coni on(coni.idcontrol_iso=con.idcontrol) ');
-$data2 = $stmt->execute();
-$data2 = $stmt->fetchAll(PDO::FETCH_OBJ);
-
-$stmt = $base->prepare('SELECT * from dimension where state_dimension= 1 ');
-$dimension = $stmt->execute();
-$dimension = $stmt->fetchAll(PDO::FETCH_OBJ);
-
 ?>
 
 <div class="layout-end p-4">
@@ -168,13 +182,13 @@ $dimension = $stmt->fetchAll(PDO::FETCH_OBJ);
 </div>
 
 <div class="modal fade" id="ModalDateMatriz" data-bs-backdrop="static" data-bs-keyboard="false" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered modal-lg">
+  <div class="modal-dialog modal-xl">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="staticBackdropLabel">Visualizar Matriz</h5>
+        <h5 class="modal-title" id="staticBackdropLabel">Modificar Matriz</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <div class="body-wrapper p-4">
+      <div class="body-wrapper p-2">
 
       </div>
     </div>
@@ -182,7 +196,7 @@ $dimension = $stmt->fetchAll(PDO::FETCH_OBJ);
 </div>
 
 <div class="modal fade" id="ModalViewMatriz" data-bs-backdrop="static" data-bs-keyboard="false" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered modal-lg">
+  <div class="modal-dialog modal-xl">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="staticBackdropLabel">Visualizar Matriz</h5>

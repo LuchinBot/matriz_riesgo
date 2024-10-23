@@ -3,7 +3,7 @@ $(document).ready(function () {
     var captcha = false;
     let intentos = localStorage.getItem('intentos');
     console.log(intentos);
-    if (intentos == 3) {
+    if (intentos >=3) {
         $('.main-login').remove();
         $('.main-login-intentes').show();
     }
@@ -29,6 +29,7 @@ $(document).ready(function () {
                     dataType: "json",
                     success: function (data) {
                         if (data.success) {
+                            localStorage.setItem('intentos', 0);
                             window.location.href = url + 'matriz';
                         } else {
                             // almacenar intentos
@@ -36,7 +37,8 @@ $(document).ready(function () {
                             localStorage.setItem('intentos', intentos);
                             $('.alert-login').html('<div class="alert alert-danger text-center">' + data.message + '</div>');
                             if (intentos >= 3) {
-                                $('.main-login').html('<div class="alert alert-danger text-center">Intentos agotados</div>');
+                                $('.main-login').remove();
+                                $('.main-login-intentes').show();
                             }
                         }
                     },

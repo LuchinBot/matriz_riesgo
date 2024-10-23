@@ -19,10 +19,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $data = [
                 'success' => true
             ];
+            $stm = $base->prepare('UPDATE user SET session_user = 1 WHERE iduser = ?');
+            $stm->execute(array($res['iduser']));
         }else{
             $data = [
                 'success' => false,
-                'message' => 'El usuario ya se encuentra conectado.'
+                'message' => 'Usuario ya conectado.'
             ];
         }
         echo json_encode($data);

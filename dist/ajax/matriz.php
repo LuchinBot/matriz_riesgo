@@ -114,98 +114,101 @@ if (isset($_GET['view'])) {
 
 ?>
     <form method="post" action="dist/ajax/save_matriz" class="valores_matriz">
-        <div class="row">
-            <div class="col-md-6">
-                <h6 class="text-center text-secondary text-uppercase fw-bold">Probabilidades</h6>
-                <table class="table table-bordered">
-                    <thead>
-                        <tr>
-                            <th class="fw-light text-center">Nombre</th>
-                            <th class="fw-light text-center">Valor</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php foreach ($rows as $probabilidad) : ?>
-                            <tr>
-                                <td>
-                                    <input type="text" minlength="4" name="nombre_probabilidad[]" required class="w-100" value="<?php echo $probabilidad->name_probabilidad; ?>">
-                                    <input type="hidden" name="id_probabilidad[]" value="<?php echo $probabilidad->idprobabilidad; ?>">
-                                </td>
-                                <td style="width: 25%;">
-                                    <input type="number" min="1" name="valor_probabilidad[]" required class="w-100" value="<?php echo $probabilidad->value_probabilidad; ?>">
-                                </td>
-                            </tr>
-                        <?php endforeach; ?>
-                    </tbody>
-                </table>
+        <div class="d-flex">
+            <div class="col-md-7">
+                <div class="col d-flex p-0">
+                    <div class="col-md-6">
+                        <h6 class="text-center text-secondary text-uppercase fw-bold">Probabilidades</h6>
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th class="fw-light text-center">Nombre</th>
+                                    <th class="fw-light text-center">Valor</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php foreach ($rows as $probabilidad) : ?>
+                                    <tr>
+                                        <td>
+                                            <input type="text" minlength="4" name="nombre_probabilidad[]" required class="w-100" value="<?php echo $probabilidad->name_probabilidad; ?>">
+                                            <input type="hidden" name="id_probabilidad[]" value="<?php echo $probabilidad->idprobabilidad; ?>">
+                                        </td>
+                                        <td style="width: 25%;">
+                                            <input type="number" min="1" name="valor_probabilidad[]" required class="w-100" value="<?php echo $probabilidad->value_probabilidad; ?>">
+                                        </td>
+                                    </tr>
+                                <?php endforeach; ?>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="col-md-6">
+                        <h6 class="text-center text-secondary text-uppercase fw-bold">Impactos</h6>
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th class="fw-light text-center">Nombre</th>
+                                    <th class="fw-light text-center">Valor</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php foreach ($cols as $impacto) : ?>
+                                    <tr>
+                                        <td>
+                                            <input type="text" minlength="4" name="nombre_impacto[]" required class="w-100" value="<?php echo $impacto->name_impacto; ?>">
+                                            <input type="hidden" name="id_impacto[]" value="<?php echo $impacto->idimpacto; ?>">
+                                        </td>
+                                        <td style="width: 25%;">
+                                            <input type="number" min="1" name="valor_impacto[]" required class="w-100" value="<?php echo $impacto->value_impacto; ?>">
+                                        </td>
+                                    </tr>
+                                <?php endforeach; ?>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="d-flex px-1 justify-content-between align-items-center mb-4">
+                    <p class="text-start fw-light text-secondary"><i class="fa-solid fa-circle-info text-danger"></i> Rellena todo los valores para poder calcular el mínimo y máximo</p>
+                    <p class="btn bg-info mb-4 fw-bold calcularMinMaxBtn"><i class="fa-solid fa-calculator"></i></p>
+                </div>
             </div>
-            <div class="col-md-6">
-                <h6 class="text-center text-secondary text-uppercase fw-bold">Impactos</h6>
-                <table class="table table-bordered">
-                    <thead>
-                        <tr>
-                            <th class="fw-light text-center">Nombre</th>
-                            <th class="fw-light text-center">Valor</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php foreach ($cols as $impacto) : ?>
+            <div class="col-md-5">
+                <div class="col-md-12">
+                    <h6 class="text-center text-secondary text-uppercase fw-bold">Niveles de riesgo</h6>
+                    <table class="table table-bordered">
+                        <thead>
                             <tr>
-                                <td>
-                                    <input type="text" minlength="4" name="nombre_impacto[]" required class="w-100" value="<?php echo $impacto->name_impacto; ?>">
-                                    <input type="hidden" name="id_impacto[]" value="<?php echo $impacto->idimpacto; ?>">
-                                </td>
-                                <td style="width: 25%;">
-                                    <input type="number" min="1" name="valor_impacto[]" required class="w-100" value="<?php echo $impacto->value_impacto; ?>">
-                                </td>
+                                <th class="fw-light text-center">Nombre</th>
+                                <th class="fw-light text-center">Mínimo</th>
+                                <th class="fw-light text-center">Máximo</th>
+                                <th class="fw-light text-center">Color</th>
                             </tr>
-                        <?php endforeach; ?>
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody class="niveles">
+                            <?php foreach ($levels as $level) : ?>
+                                <tr>
+                                    <td>
+                                        <p class="text-center fw-bolder text-secondary"><?php echo $level->name_level; ?></p>
+                                        <input type="hidden" name="id_level[]" value="<?php echo $level->idlevel; ?>">
+                                    </td>
+                                    <td style="width: 20%;">
+                                        <input type="number" min="1" name="min_level[]" required class="w-100" value="<?php echo $level->min_level; ?>">
+                                    </td>
+                                    <td style="width: 20%;">
+                                        <input type="number" min="1" name="max_level[]" required class="w-100" value="<?php echo $level->max_level; ?>">
+                                    </td>
+                                    <td>
+                                        <input type="color" name="color_level[]" required class="w-100" value="<?php echo $level->color_level; ?>">
+                                    </td>
+                                </tr>
+                            <?php endforeach; ?>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
-        <div class="d-flex justify-content-between align-items-center border-bottom mb-4">
-            <p class="text-start fw-light text-secondary"><i class="fa-solid fa-circle-info text-danger"></i> Rellena todo los valores para poder calcular el mínimo y máximo</p>
-            <p class="btn bg-success mb-4 fw-bold calcularMinMaxBtn">Calcular</p>
-        </div>
-        <div class="row">
-            <div class="col-md-12">
-                <h6 class="text-center text-secondary text-uppercase fw-bold">Niveles de riesgo</h6>
-                <table class="table table-bordered">
-                    <thead>
-                        <tr>
-                            <th class="fw-light text-center">Nombre</th>
-                            <th class="fw-light text-center">Mínimo</th>
-                            <th class="fw-light text-center">Máximo</th>
-                            <th class="fw-light text-center">Color</th>
-                        </tr>
-                    </thead>
-                    <tbody class="niveles">
-                        <?php foreach ($levels as $level) : ?>
-                            <tr>
-                                <td>
-                                    <p class="text-center fw-bolder text-secondary"><?php echo $level->name_level; ?></p>
-                                    <input type="hidden" name="id_level[]" value="<?php echo $level->idlevel; ?>">
-                                </td>
-                                <td style="width: 20%;">
-                                    <input type="number" min="1" name="min_level[]" required class="w-100" value="<?php echo $level->min_level; ?>">
-                                </td>
-                                <td style="width: 20%;">
-                                    <input type="number" min="1" name="max_level[]" required class="w-100" value="<?php echo $level->max_level; ?>">
-                                </td>
-                                <td>
-                                    <input type="color" name="color_level[]" required class="w-100" value="<?php echo $level->color_level; ?>">
-                                </td>
-                            </tr>
-                        <?php endforeach; ?>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-        <div class="d-flex justify-content-end">
+        <div class="d-flex justify-content-end border-top py-3">
             <button type="submit" class="btn bg-success mb-4 fw-bold">Guardar cambios</button>
         </div>
-
     </form>
 <?php }
 if (isset($_GET['matriz'])) {

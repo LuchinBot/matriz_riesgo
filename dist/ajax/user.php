@@ -1,6 +1,6 @@
 <?php
 require('../../layout/conexion.php');
-$url = "http://localhost/matriz_riesgo/";
+$url = "http://matriz_riesgo.test/";
 
 if (isset($_GET['id'])) {
 

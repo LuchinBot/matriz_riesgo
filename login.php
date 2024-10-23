@@ -4,8 +4,7 @@ $title = "Loguearse";
 include "layout/header.php";
 
 if (isset($_SESSION['user'])) {
-  header('Location: matriz');
-  exit();
+  echo '<script>window.location.href = "' . $url . '";</script>';
 }
 
 ?>
